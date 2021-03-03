@@ -1,4 +1,4 @@
-#! /usr/bin/python -O
+#!/usr/bin/env python3
 
 """
 C and C++ source code base indexer using libclang.
@@ -45,7 +45,7 @@ def sendRequest (request, processOutput=sys.stdout.write):
                                 stdout = subprocess.PIPE)
     process.stdin.write (request + "\n\n")
 
-    while 1:
+    while True:
         # Use readline() to avoid buffering problems
         line = process.stdout.readline()
         if line == "":
@@ -65,7 +65,7 @@ def start (args):
         sys.stderr.write ("ERROR: socket already exists!\n")
         sys.exit (1)
 
-    print "Starting server..."
+    print("Starting server...")
     command = ["sh", "-c", "clang-tags-server --cachesize %d >%s 2>&1 &" %
         (args.cachesize, logPath)]
     sys.exit (subprocess.call (command))
